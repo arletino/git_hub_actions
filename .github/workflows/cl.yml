@@ -2,7 +2,7 @@ name: first_step
 
 on:
     push:
-    pull_requests:
+    pull_request:
 
 jobs:
     test:
