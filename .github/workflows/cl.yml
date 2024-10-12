@@ -23,13 +23,7 @@ jobs:
                 pip install poetry
                 poetry config virtualenvs.create false
                 poetry install
-
-            
-            - name: Run Server Uvicorn
-              run: |
-                cd ./app
-                uvicorn main:app --host 0.0.0.0 --port 8080 &
-            
+           
             - name: Run tests
               run: |
                 pytest
