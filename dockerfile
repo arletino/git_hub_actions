@@ -17,9 +17,9 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 
 # Копируем проект
-COPY app ./
+COPY app ./app
 
 # Копируем тесты
-COPY test ./
+COPY test ./test
 
 CMD ["poetry", "run", "pytest"]
