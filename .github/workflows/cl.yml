@@ -2,7 +2,8 @@ name: first_step
 
 on:
     push:
-    pull_request:
+      branches:
+        - main
 
 jobs:
     test:
@@ -12,18 +13,11 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Set up Python
-              uses: actions/setup-python@v2
-              with:
-                python-version: '3.12'
 
-            - name: Install dependencies
+            - name: Set up Docker Compose
               run: |
-                python -m pip install --upgrade pip
-                pip install poetry
-                poetry config virtualenvs.create false
-                poetry install
+                docker-compose -f docker-compose.yml up --build --abort-on-container-exit
            
-            - name: Run tests
-              run: |
-                pytest
+            - name: Tear down Docker Compose
+              if: always()
+              run: docker-compose -f docker-compose.yml down

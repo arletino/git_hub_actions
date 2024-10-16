@@ -1,4 +1,14 @@
+def contest(func):
+    def wraper(*args, **kwargs):
+        with func(*args, **kwargs) as f:
+            return f(*args, **kwargs)
 
-test = [True, True, True, True]
+    return wraper
 
-assert all(test)
+
+@contest
+def some(name):
+    return a + 1
+
+
+print(some(5))
