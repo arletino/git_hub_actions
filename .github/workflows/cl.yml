@@ -11,13 +11,19 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
 
             - name: Set up Docker Compose
               run: |
                 docker compose up --build --abort-on-container-exit
-           
+
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v3
+              with:
+                name: coverage-report
+                path: test-reports/coverage.xml
+                
             - name: Tear down Docker Compose
               if: always()
-              run: docker compose down
+              run: docker compose -f docker-compose.yml down
